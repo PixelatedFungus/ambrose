@@ -1,7 +1,8 @@
 package lusaris;
 
 import java.io.Serializable;
-import java.time.LocalTime;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Task implements Serializable {
 
@@ -9,14 +10,14 @@ public class Task implements Serializable {
     private String _title;
 
     /* The date of this Task's creation. */
-    private LocalTime _currentDate;
+    private Date _currentDate;
 
     /* The details of this Task. */
     private String _details;
 
     public Task(String title) {
         _title = title;
-        _currentDate = LocalTime.now();
+        _currentDate = new Date();
         _details = "Placeholder";
     }
 
@@ -54,6 +55,7 @@ public class Task implements Serializable {
      * @return The title of the task and the time at which it was created.
      */
     public String toString() {
-        return _title + " created at " + _currentDate.toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        return _title + " created at " + dateFormat.format(_currentDate);
     }
 }
