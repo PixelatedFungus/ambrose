@@ -1,9 +1,7 @@
 package lusaris;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -56,7 +54,9 @@ public class AionCommands {
                     for (int i = 0; i < taskHashes.size(); i++) {
                         System.out.printf("%d ..... ", i + 1);
                         Task taskObj =
-                                AionUtils.deserializeObject(taskHashes.get(i),
+                                AionUtils.deserializeObject(
+                                        Aion.activeFolder.getPath()
+                                                + "/" + taskHashes.get(i),
                                         Task.class);
                         System.out.println(taskObj);
                     }
@@ -67,6 +67,9 @@ public class AionCommands {
                         correctIn = true;
                         selectedTaskToRemove =
                                 taskHashes.get(Integer.parseInt(userInput) - 1);
+                    } else {
+                        System.out.println("Please enter one of the "
+                                + "numbers above.");
                     }
                 }
             } else {
@@ -74,8 +77,11 @@ public class AionCommands {
             }
             File fileToDelete = new File(Aion.activeFolder + "/"
                     + selectedTaskToRemove);
-            fileToDelete.delete();
-            taskHashes.remove(selectedTaskToRemove);
+            if (fileToDelete.delete()) {
+                System.out.printf("The task %s was successfully deleted.",
+                        taskName);
+                taskHashes.remove(selectedTaskToRemove);
+            }
             if (taskHashes.size() == 0) {
                 Aion.activeTasks.remove(taskName);
             }
