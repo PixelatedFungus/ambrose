@@ -17,6 +17,16 @@ public class Main {
                 break;
             case "wordle":
                 Wordle newWordle = new Wordle();
+                newWordle.invalidLetter('a');
+                newWordle.invalidLetter('u');
+                newWordle.invalidLetter('d');
+                newWordle.characterExists('i', 3);
+                newWordle.invalidLetter('o');
+                newWordle.characterExists('r', 0);
+                newWordle.invalidLetter('e');
+                newWordle.characterAt('i', 2);
+                newWordle.characterExists('g', 3);
+                newWordle.characterExists('n', 4);
                 System.out.println(newWordle.get_filteredWords());
                 break;
             case "schedule":
