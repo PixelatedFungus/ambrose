@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Wordle {
@@ -29,7 +30,14 @@ public class Wordle {
         }
     }
 
-    public void invalidLetter(char c) {
+    public void invalidCharacters(List<Character> characterList) {
+        for (Character character: characterList) {
+            invalidCharacter(character);
+        }
+    }
+
+
+    private void invalidCharacter(char c) {
         _filteredWords.removeIf(listWord -> listWord.contains(Character.toString(c)));
     }
 
